@@ -44,6 +44,11 @@ class AnswersDao @Inject() (protected val dbConfigProvider: DatabaseConfigProvid
   lazy val insertAnswer = answers returning answers.map(_.questionId)
 
 
+  /**
+    * Saving an answer in the db
+    * @param answer
+    * @return
+    */
   def addAnswer(answer: Answer): Future[Unit] = db.run(insertAnswer += answer).map(_ => ())
 
   def addAnswers(answers: Seq[Answer]):Future[Unit] = db.run(this.answers ++= answers).map(_ =>())
